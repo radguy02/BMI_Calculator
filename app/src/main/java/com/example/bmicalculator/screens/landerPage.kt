@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ElevatedButton
@@ -59,10 +60,18 @@ fun LanderPage() {
 
         Spacer(Modifier.padding(40.dp))
 
+        Text("Get started with tracking your health with a BMI Calculator",
+            fontSize = 14.sp,
+            fontFamily = FontFamily(Font(R.font.playwritemoderna, FontWeight.ExtraBold)) ,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.width(220.dp)
+        )
+
+
         Box(modifier = Modifier.padding(top = 20.dp)){
             OutlinedButton(onClick = {""},
                 colors = ButtonColors(
-                    contentColor = MaterialTheme.colorScheme.onSurface,
+                    contentColor = MaterialTheme.colorScheme.background,
                     containerColor = MaterialTheme.colorScheme.primary,
                     disabledContainerColor = MaterialTheme.colorScheme.surface,
                     disabledContentColor = MaterialTheme.colorScheme.onSurface
@@ -73,7 +82,7 @@ fun LanderPage() {
                 Spacer(modifier = Modifier.padding(8.dp))
                 Icon(painter = painterResource(R.drawable.baseline_keyboard_arrow_right_24),
                     contentDescription = "",
-                    tint = MaterialTheme.colorScheme.onBackground)
+                    tint = MaterialTheme.colorScheme.background)
             }
         }
     }
