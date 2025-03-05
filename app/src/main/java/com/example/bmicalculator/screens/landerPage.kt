@@ -35,41 +35,52 @@ import com.example.bmicalculator.R
 @Preview(showBackground = true)
 @Composable
 fun LanderPage() {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(color = MaterialTheme.colorScheme.background),
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center) {
-        Column{
-            Text("Get your BMI",
+        verticalArrangement = Arrangement.Center
+    ) {
+        Column {
+            Text(
+                "Get your BMI",
                 fontSize = 30.sp,
-                fontFamily = FontFamily(Font(R.font.playwritemoderna, FontWeight.ExtraBold)) ,
-                color = MaterialTheme.colorScheme.onBackground)
+                fontFamily = FontFamily(Font(R.font.playwritemoderna, FontWeight.ExtraBold)),
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
         }
 
         Spacer(modifier = Modifier.padding(20.dp))
 
-        Column(modifier = Modifier.fillMaxWidth()
-            .height(250.dp),
-            horizontalAlignment = Alignment.CenterHorizontally){
-            Image(painter = painterResource(id = R.drawable.landingpageimg),
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.landingpageimg),
                 contentDescription = "",
-                Modifier.fillMaxSize())
+                Modifier.fillMaxSize()
+            )
         }
 
         Spacer(Modifier.padding(40.dp))
 
-        Text("Get started with tracking your health with a BMI Calculator",
+        Text(
+            "Get started with tracking your health with a BMI Calculator",
             fontSize = 14.sp,
-            fontFamily = FontFamily(Font(R.font.playwritemoderna, FontWeight.ExtraBold)) ,
+            fontFamily = FontFamily(Font(R.font.playwritemoderna, FontWeight.ExtraBold)),
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.width(220.dp)
         )
 
 
-        Box(modifier = Modifier.padding(top = 20.dp)){
-            OutlinedButton(onClick = {""},
+        Box(modifier = Modifier.padding(top = 20.dp)) {
+            OutlinedButton(
+                onClick = { "" },
                 colors = ButtonColors(
                     contentColor = MaterialTheme.colorScheme.background,
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -77,12 +88,14 @@ fun LanderPage() {
                     disabledContentColor = MaterialTheme.colorScheme.onSurface
                 ),
                 modifier = Modifier.size(150.dp, 50.dp)
-                ) {
+            ) {
                 Text("Get Started")
                 Spacer(modifier = Modifier.padding(8.dp))
-                Icon(painter = painterResource(R.drawable.baseline_keyboard_arrow_right_24),
+                Icon(
+                    painter = painterResource(R.drawable.baseline_keyboard_arrow_right_24),
                     contentDescription = "",
-                    tint = MaterialTheme.colorScheme.background)
+                    tint = MaterialTheme.colorScheme.background
+                )
             }
         }
     }
