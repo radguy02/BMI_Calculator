@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -24,22 +26,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bmicalculator.R
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Preview(showBackground = true)
 @Composable
 fun Datapage() {
     var showInfo by remember { mutableStateOf(false) }
+    var sliderProgressValue by rememberSaveable { mutableStateOf(120) }
+
     Scaffold { paddingValues ->
         Box(
             modifier = Modifier
@@ -84,21 +93,65 @@ fun Datapage() {
                             )
                             .border(2.dp, Color(0xFF002D67), RoundedCornerShape(12.dp))
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(8.dp)
-                        ) {
-                            Text(
-                                "Height",
-                                fontFamily = FontFamily(Font(R.font.lilitaoneregular)),
-                                fontSize = 24.sp,
-                                color = MaterialTheme.colorScheme.onBackground,
-                                modifier = Modifier.align(Alignment.CenterHorizontally)
-                            )
+                        Column() {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxHeight(.1f)
+                                    .fillMaxWidth()
+                                    .padding(8.dp)
+
+
+                            ) {
+                                Text(
+                                    "Height",
+                                    fontFamily = FontFamily(Font(R.font.lilitaoneregular)),
+                                    fontSize = 24.sp,
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                                )
+                            }
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillMaxHeight()
+                                    .padding(8.dp)
+                            ) {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .fillMaxWidth(),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = "$sliderProgressValue",
+                                        textAlign = TextAlign.Center,
+                                        fontFamily = FontFamily(
+                                            Font(
+                                                R.font.lilitaoneregular,
+                                                FontWeight.Bold
+                                            )
+                                        ),
+                                        fontSize = 32.sp,
+                                        modifier = Modifier.fillMaxWidth()
+                                    )
+
+                                    Spacer(modifier = Modifier.padding(10.dp))
+
+                                    Card(
+                                        modifier = Modifier
+                                            .wrapContentSize(),
+                                        shape = RoundedCornerShape(30.dp)
+
+                                    ) {
+                                        ComposeVerticalSlider(progressValue = sliderProgressValue) {
+                                            sliderProgressValue = it
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        Column { /* slider code */ }
                     }
+
                     Column(
                         modifier = Modifier
                             .fillMaxHeight()
@@ -114,9 +167,11 @@ fun Datapage() {
                                 )
                                 .border(2.dp, Color(0xFF002D67), RoundedCornerShape(12.dp))
                         ) {
-                            Column(modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(8.dp)) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(8.dp)
+                            ) {
                                 Text(
                                     "Age",
                                     fontFamily = FontFamily(Font(R.font.lilitaoneregular)),
@@ -126,6 +181,7 @@ fun Datapage() {
                                 )
                             }
                         }
+
                         Spacer(Modifier.size(8.dp))
                         Box(
                             modifier = Modifier
@@ -137,9 +193,11 @@ fun Datapage() {
                                 )
                                 .border(2.dp, Color(0xFF002D67), RoundedCornerShape(12.dp))
                         ) {
-                            Column(modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(8.dp)) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(8.dp)
+                            ) {
                                 Text(
                                     "Weight",
                                     fontFamily = FontFamily(Font(R.font.lilitaoneregular)),
@@ -152,6 +210,7 @@ fun Datapage() {
                     }
                 }
 
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -159,7 +218,7 @@ fun Datapage() {
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    ElevatedButton(onClick = { "" }) {
+                    ElevatedButton(onClick = { " " }) {
                         Text(
                             "Calculate",
                             fontFamily = FontFamily(Font(R.font.lilitaoneregular)),
@@ -195,10 +254,10 @@ fun Datapage() {
                             )
                             .padding(8.dp)
                     )
-
                     Spacer(modifier = Modifier.height(24.dp))
                 }
             }
+
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
@@ -219,4 +278,29 @@ fun Datapage() {
             }
         }
     }
+}
+
+@ExperimentalComposeUiApi
+@Composable
+fun ComposeVerticalSlider(
+    progressValue: Int? = null,
+    value: (Int) -> Unit
+) {
+    val state = rememberComposeVerticalSlider()
+    VerticalSlider(
+        state = state,
+        modifier = Modifier
+            .fillMaxHeight()
+            .fillMaxWidth(.6f),
+        trackColor = MaterialTheme.colorScheme.secondary,
+        progressTrackColor = MaterialTheme.colorScheme.onSecondary,
+        onProgressChanged = {
+            value(it)
+        },
+        onStopTrackingTouch = {
+            value(it)
+        },
+        enabled = state.isEnabled.value,
+        progressValue = progressValue
+    )
 }
