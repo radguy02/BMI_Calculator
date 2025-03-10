@@ -28,6 +28,7 @@ import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -41,19 +42,19 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bmicalculator.R
+import com.yourapp.viewmodel.SharedViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
-@Preview(showBackground = true)
 @Composable
-fun Datapage() {
+fun Datapage(navController: NavController, viewModel: SharedViewModel) {
     var showInfo by remember { mutableStateOf(false) }
-    var sliderProgressValue by rememberSaveable { mutableStateOf(120) }
-    var weightint by rememberSaveable { mutableStateOf(0) }
-    var ageint by rememberSaveable { mutableStateOf(0) }
+    var sliderProgressValue by rememberSaveable { mutableIntStateOf(120) }
+    var weightint by rememberSaveable { mutableIntStateOf(0) }
+    var ageint by rememberSaveable { mutableIntStateOf(0) }
 
     Scaffold { paddingValues ->
         Box(
@@ -206,9 +207,9 @@ fun Datapage() {
                                         .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
-                                    Box() {
+                                    Box{
                                         Button(
-                                            onClick = { ageint = ageint +1 },
+                                            onClick = { ageint += 1 },
                                             shape = CircleShape,
                                             modifier = Modifier.size(45.dp)
                                         ) {
@@ -219,10 +220,12 @@ fun Datapage() {
                                             modifier = Modifier.size(45.dp)
                                         )
                                     }
-                                    Box() {
+                                    Box{
                                         Button(
-                                            onClick = { if(ageint>0){
-                                            ageint = ageint -1}
+                                            onClick = {
+                                                if (ageint > 0) {
+                                                    ageint -= 1
+                                                }
                                             },
                                             shape = CircleShape,
                                             modifier = Modifier.size(45.dp)
@@ -287,9 +290,9 @@ fun Datapage() {
                                         .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
-                                    Box() {
+                                    Box{
                                         Button(
-                                            onClick = { weightint = weightint+1 },
+                                            onClick = { weightint += 1 },
                                             shape = CircleShape,
                                             modifier = Modifier.size(45.dp)
                                         ) {
@@ -300,10 +303,12 @@ fun Datapage() {
                                             modifier = Modifier.size(45.dp)
                                         )
                                     }
-                                    Box() {
+                                    Box{
                                         Button(
-                                            onClick = { if(weightint>0){
-                                            weightint = weightint -1}
+                                            onClick = {
+                                                if (weightint > 0) {
+                                                    weightint -= 1
+                                                }
                                             },
                                             shape = CircleShape,
                                             modifier = Modifier.size(45.dp)
@@ -330,7 +335,13 @@ fun Datapage() {
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    ElevatedButton(onClick = { " " }) {
+                    ElevatedButton(onClick = {
+                        viewModel.calculateValue(
+                            weight = weightint,
+                            height = sliderProgressValue
+                        )
+                        navController.navigate("screen3")
+                    }) {
                         Text(
                             "Calculate",
                             fontFamily = FontFamily(Font(R.font.lilitaoneregular)),

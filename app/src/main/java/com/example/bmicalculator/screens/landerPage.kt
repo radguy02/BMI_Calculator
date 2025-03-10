@@ -12,9 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -22,19 +20,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bmicalculator.R
 
-@Preview(showBackground = true)
 @Composable
-fun LanderPage() {
+fun LanderPage(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -80,7 +76,7 @@ fun LanderPage() {
 
         Box(modifier = Modifier.padding(top = 20.dp)) {
             OutlinedButton(
-                onClick = { "" },
+                onClick = { navController.navigate("screen2") },
                 colors = ButtonColors(
                     contentColor = MaterialTheme.colorScheme.background,
                     containerColor = MaterialTheme.colorScheme.primary,

@@ -10,29 +10,30 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.yourapp.viewmodel.SharedViewModel
 
 
-@Preview(showBackground = true)
 @Composable
-fun LastPage() {
+fun LastPage(navController: NavController, viewModel: SharedViewModel) {
+
+
     Scaffold { innerpadding ->
         Column(
             modifier = Modifier
@@ -59,46 +60,54 @@ fun LastPage() {
                         .border(2.dp, Color.Black, RoundedCornerShape(32.dp)),
                 ) {
                     Column(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Box(
+
+                        Text(
+                            text = "BMI",
+                            textAlign = TextAlign.Center,
                             modifier = Modifier
                                 .fillMaxHeight(.3f)
                                 .fillMaxWidth(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "BMI",
-                                fontSize = 48.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onPrimary
-                            )
-                        }
-                        Box(
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .fillMaxWidth(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text("Value", fontSize = 28.sp)
-                        }
+                            fontSize = 48.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                        Spacer(modifier = Modifier.fillMaxHeight(.4f))
+                        Text(
+                            "${viewModel.calculatedValue}",
+                            fontFamily = FontFamily(
+                                Font(
+                                    R.font.lilitaoneregular,
+                                    FontWeight.Bold
+                                )
+                            ), fontSize = 42.sp
+                        )
                     }
                 }
             }
             Column(
                 modifier = Modifier.fillMaxHeight(),
-                verticalArrangement = Arrangement.Bottom
+                verticalArrangement = Arrangement.Top
             ) {
+                Spacer(modifier = Modifier.fillMaxHeight(.4f))
+
                 OutlinedButton(
-                    onClick = { "" },
-                    modifier = Modifier.padding(96.dp),
+                    onClick = { navController.navigate("screen2") },
+                    modifier = Modifier.align(Alignment.Start),
                     colors = ButtonDefaults.outlinedButtonColors(
                         containerColor = MaterialTheme.colorScheme.surface,
                         contentColor = MaterialTheme.colorScheme.onSurface
                     )
                 ) {
-                    Text("Back")
+                    Text(
+                        "Back", fontFamily = FontFamily(Font(R.font.lilitaoneregular)),
+                        fontSize = 24.sp,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
                 }
             }
         }
