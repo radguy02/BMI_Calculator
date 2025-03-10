@@ -1,18 +1,18 @@
 package com.example.bmicalculator
 
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.bmicalculator.screens.Datapage
+import com.example.bmicalculator.screens.LanderPage
+import com.example.bmicalculator.screens.LastPage
 import com.example.bmicalculator.ui.theme.BmiCalculatorTheme
-import com.example.bmicalculator.screens.*
 import com.yourapp.viewmodel.SharedViewModel
 
 class MainActivity : ComponentActivity() {
@@ -21,18 +21,17 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BmiCalculatorTheme {
-
+                AppNavigation()
             }
         }
     }
 }
 
 
-
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    val viewModel: SharedViewModel = viewModel() // ViewModel instance
+    val viewModel: SharedViewModel = viewModel() // ViewModel instance for bmi value primarily
 
     NavHost(navController, startDestination = "screen1") {
         composable("screen1") {

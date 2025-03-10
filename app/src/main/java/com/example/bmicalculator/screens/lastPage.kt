@@ -1,4 +1,4 @@
-package com.example.bmicalculator
+package com.example.bmicalculator.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.bmicalculator.R
 import com.yourapp.viewmodel.SharedViewModel
 
 
@@ -78,7 +79,7 @@ fun LastPage(navController: NavController, viewModel: SharedViewModel) {
                         )
                         Spacer(modifier = Modifier.fillMaxHeight(.4f))
                         Text(
-                            "${viewModel.calculatedValue}",
+                            "${viewModel.calculatedValue.value}",
                             fontFamily = FontFamily(
                                 Font(
                                     R.font.lilitaoneregular,

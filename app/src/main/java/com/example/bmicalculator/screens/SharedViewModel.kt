@@ -8,6 +8,6 @@ class SharedViewModel : ViewModel() {
         private set
 
     fun calculateValue(height: Int, weight: Int) {
-        calculatedValue.value = weight/(height/height)
+        calculatedValue.value = weight/(height*height)
     }
 }
