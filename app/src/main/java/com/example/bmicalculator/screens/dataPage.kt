@@ -14,7 +14,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
@@ -48,6 +52,8 @@ import com.example.bmicalculator.R
 fun Datapage() {
     var showInfo by remember { mutableStateOf(false) }
     var sliderProgressValue by rememberSaveable { mutableStateOf(120) }
+    var weightint by rememberSaveable { mutableStateOf(0) }
+    var ageint by rememberSaveable { mutableStateOf(0) }
 
     Scaffold { paddingValues ->
         Box(
@@ -93,7 +99,7 @@ fun Datapage() {
                             )
                             .border(2.dp, Color(0xFF002D67), RoundedCornerShape(12.dp))
                     ) {
-                        Column() {
+                        Column {
                             Column(
                                 modifier = Modifier
                                     .fillMaxHeight(.1f)
@@ -179,6 +185,57 @@ fun Datapage() {
                                     color = MaterialTheme.colorScheme.onBackground,
                                     modifier = Modifier.align(Alignment.CenterHorizontally)
                                 )
+                                Spacer(modifier = Modifier.fillMaxHeight(.2f))
+                                Text(
+                                    "$ageint",
+                                    textAlign = TextAlign.Center,
+                                    fontFamily = FontFamily(
+                                        Font(
+                                            R.font.lilitaoneregular,
+                                            FontWeight.Bold
+                                        )
+                                    ),
+                                    fontSize = 42.sp,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .fillMaxHeight(.5f)
+                                )
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    Box() {
+                                        Button(
+                                            onClick = { ageint = ageint +1 },
+                                            shape = CircleShape,
+                                            modifier = Modifier.size(45.dp)
+                                        ) {
+                                        }
+                                        Icon(
+                                            imageVector = Icons.Default.Add,
+                                            contentDescription = "",
+                                            modifier = Modifier.size(45.dp)
+                                        )
+                                    }
+                                    Box() {
+                                        Button(
+                                            onClick = { if(ageint>0){
+                                            ageint = ageint -1}
+                                            },
+                                            shape = CircleShape,
+                                            modifier = Modifier.size(45.dp)
+                                        ) {
+
+                                        }
+                                        Icon(
+                                            painter = painterResource(R.drawable.sub),
+                                            contentDescription = "",
+                                            modifier = Modifier.size(45.dp)
+                                        )
+                                    }
+                                }
                             }
                         }
 
@@ -203,8 +260,63 @@ fun Datapage() {
                                     fontFamily = FontFamily(Font(R.font.lilitaoneregular)),
                                     fontSize = 24.sp,
                                     color = MaterialTheme.colorScheme.onBackground,
-                                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                                    modifier = Modifier
+                                        .align(Alignment.CenterHorizontally)
+                                        .fillMaxHeight(.1f)
                                 )
+
+                                Spacer(modifier = Modifier.fillMaxHeight(.2f))
+
+                                Text(
+                                    "$weightint",
+                                    textAlign = TextAlign.Center,
+                                    fontFamily = FontFamily(
+                                        Font(
+                                            R.font.lilitaoneregular,
+                                            FontWeight.Bold
+                                        )
+                                    ),
+                                    fontSize = 42.sp,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .fillMaxHeight(.5f)
+                                )
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    Box() {
+                                        Button(
+                                            onClick = { weightint = weightint+1 },
+                                            shape = CircleShape,
+                                            modifier = Modifier.size(45.dp)
+                                        ) {
+                                        }
+                                        Icon(
+                                            imageVector = Icons.Default.Add,
+                                            contentDescription = "",
+                                            modifier = Modifier.size(45.dp)
+                                        )
+                                    }
+                                    Box() {
+                                        Button(
+                                            onClick = { if(weightint>0){
+                                            weightint = weightint -1}
+                                            },
+                                            shape = CircleShape,
+                                            modifier = Modifier.size(45.dp)
+                                        ) {
+
+                                        }
+                                        Icon(
+                                            painter = painterResource(R.drawable.sub),
+                                            contentDescription = "",
+                                            modifier = Modifier.size(45.dp)
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
@@ -304,3 +416,4 @@ fun ComposeVerticalSlider(
         progressValue = progressValue
     )
 }
+
