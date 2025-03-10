@@ -1,13 +1,13 @@
-package com.yourapp.viewmodel
+package com.example.bmicalculator.screens
 
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.lifecycle.ViewModel
-import androidx.compose.runtime.mutableStateOf
 
 class SharedViewModel : ViewModel() {
-    var calculatedValue = mutableStateOf(0)
-        private set
+    var calculatedValue = mutableFloatStateOf(0.0f)
 
-    fun calculateValue(height: Int, weight: Int) {
-        calculatedValue.value = weight/(height*height)
+    fun calculateValue(weight: Int, height: Int) {
+        calculatedValue.floatValue = weight / ((height / 100f) * (height / 100f))
+
     }
 }

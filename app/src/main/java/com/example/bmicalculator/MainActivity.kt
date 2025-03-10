@@ -13,7 +13,7 @@ import com.example.bmicalculator.screens.Datapage
 import com.example.bmicalculator.screens.LanderPage
 import com.example.bmicalculator.screens.LastPage
 import com.example.bmicalculator.ui.theme.BmiCalculatorTheme
-import com.yourapp.viewmodel.SharedViewModel
+import com.example.bmicalculator.screens.SharedViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +31,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    val viewModel: SharedViewModel = viewModel() // ViewModel instance for bmi value primarily
-
+    val viewModel: SharedViewModel = viewModel()
     NavHost(navController, startDestination = "screen1") {
         composable("screen1") {
             LanderPage(navController)

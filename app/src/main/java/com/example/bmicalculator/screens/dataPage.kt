@@ -48,15 +48,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bmicalculator.R
-import com.yourapp.viewmodel.SharedViewModel
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun Datapage(navController: NavController, viewModel: SharedViewModel) {
     var showInfo by remember { mutableStateOf(false) }
-    var sliderProgressValue by rememberSaveable { mutableIntStateOf(120) }
-    var weightint by rememberSaveable { mutableIntStateOf(0) }
-    var ageint by rememberSaveable { mutableIntStateOf(0) }
+    var sliderProgressValue by remember { mutableIntStateOf(120) }
+    var weightint by remember { mutableIntStateOf(0) }
+    var ageint by remember{ mutableIntStateOf(0) }
 
     Scaffold { paddingValues ->
         Box(
@@ -136,8 +135,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                         textAlign = TextAlign.Center,
                                         fontFamily = FontFamily(
                                             Font(
-                                                R.font.lilitaoneregular,
-                                                FontWeight.Bold
+                                                R.font.lilitaoneregular, FontWeight.Bold
                                             )
                                         ),
                                         fontSize = 32.sp,
@@ -147,8 +145,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                     Spacer(modifier = Modifier.padding(10.dp))
 
                                     Card(
-                                        modifier = Modifier
-                                            .wrapContentSize(),
+                                        modifier = Modifier.wrapContentSize(),
                                         shape = RoundedCornerShape(30.dp)
 
                                     ) {
@@ -194,8 +191,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                     textAlign = TextAlign.Center,
                                     fontFamily = FontFamily(
                                         Font(
-                                            R.font.lilitaoneregular,
-                                            FontWeight.Bold
+                                            R.font.lilitaoneregular, FontWeight.Bold
                                         )
                                     ),
                                     fontSize = 42.sp,
@@ -218,8 +214,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                                 .combinedClickable(
                                                     onClick = { ageint += 1 },
                                                     onLongClick = { ageint += 5 })
-                                        ) {
-                                        }
+                                        ) {}
                                         Icon(
                                             imageVector = Icons.Default.Add,
                                             contentDescription = "",
@@ -293,8 +288,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                     textAlign = TextAlign.Center,
                                     fontFamily = FontFamily(
                                         Font(
-                                            R.font.lilitaoneregular,
-                                            FontWeight.Bold
+                                            R.font.lilitaoneregular, FontWeight.Bold
                                         )
                                     ),
                                     fontSize = 42.sp,
@@ -308,47 +302,27 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                         .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
-                                    Box {
-                                        Button(
-                                            onClick = { weightint += 1 },
-                                            shape = CircleShape,
-                                            modifier = Modifier
-                                                .size(45.dp)
-                                                .combinedClickable(
-                                                    onClick = { weightint += 1 },
-                                                    onLongClick = { weightint += 10 })
-                                        ) {
-                                        }
+                                    Box(modifier = Modifier.combinedClickable(onClick = {
+                                        weightint += 1
+                                    }, onLongClick = { weightint += 10 }
+                                    )) {
                                         Icon(
                                             imageVector = Icons.Default.Add,
                                             contentDescription = "",
                                             modifier = Modifier.size(45.dp)
                                         )
                                     }
-                                    Box {
-                                        Button(
-                                            onClick = {
-                                                if (weightint > 0) {
-                                                    weightint -= 1
-                                                }
-                                            },
-                                            shape = CircleShape,
-                                            modifier = Modifier
-                                                .size(45.dp)
-                                                .combinedClickable(onClick = {
-                                                    if (weightint > 0) {
-                                                        weightint -= 1
-                                                    }
-                                                }, onLongClick = {
-                                                    if (weightint >= 10) {
-                                                        weightint -= 10
-                                                    } else {
-                                                        weightint = 0
-                                                    }
-                                                })
-                                        ) {
-
+                                    Box(modifier = Modifier.combinedClickable(onClick = {
+                                        if (weightint > 0) {
+                                            weightint -= 1
                                         }
+                                    }, onLongClick = {
+                                        if (weightint >= 10) {
+                                            weightint -= 10
+                                        } else {
+                                            weightint = 0
+                                        }
+                                    })) {
                                         Icon(
                                             painter = painterResource(R.drawable.sub),
                                             contentDescription = "",
@@ -371,8 +345,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                 ) {
                     ElevatedButton(onClick = {
                         viewModel.calculateValue(
-                            weight = weightint,
-                            height = sliderProgressValue
+                            weight = weightint, height = sliderProgressValue
                         )
                         navController.navigate("screen3")
                     }) {
@@ -440,8 +413,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
 @ExperimentalComposeUiApi
 @Composable
 fun ComposeVerticalSlider(
-    progressValue: Int? = null,
-    value: (Int) -> Unit
+    progressValue: Int? = null, value: (Int) -> Unit
 ) {
     val state = rememberComposeVerticalSlider()
     VerticalSlider(
@@ -461,4 +433,3 @@ fun ComposeVerticalSlider(
         progressValue = progressValue
     )
 }
-

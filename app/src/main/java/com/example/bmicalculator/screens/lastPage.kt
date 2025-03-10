@@ -1,5 +1,6 @@
 package com.example.bmicalculator.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -28,9 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bmicalculator.R
-import com.yourapp.viewmodel.SharedViewModel
 
 
+@SuppressLint("DefaultLocale")
 @Composable
 fun LastPage(navController: NavController, viewModel: SharedViewModel) {
 
@@ -79,20 +80,19 @@ fun LastPage(navController: NavController, viewModel: SharedViewModel) {
                         )
                         Spacer(modifier = Modifier.fillMaxHeight(.4f))
                         Text(
-                            "${viewModel.calculatedValue.value}",
+                            text = String.format("%.1f", viewModel.calculatedValue.floatValue),
                             fontFamily = FontFamily(
                                 Font(
-                                    R.font.lilitaoneregular,
-                                    FontWeight.Bold
+                                    R.font.lilitaoneregular, FontWeight.Bold
                                 )
-                            ), fontSize = 42.sp
+                            ),
+                            fontSize = 42.sp
                         )
                     }
                 }
             }
             Column(
-                modifier = Modifier.fillMaxHeight(),
-                verticalArrangement = Arrangement.Top
+                modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.Top
             ) {
                 Spacer(modifier = Modifier.fillMaxHeight(.4f))
 
@@ -105,7 +105,8 @@ fun LastPage(navController: NavController, viewModel: SharedViewModel) {
                     )
                 ) {
                     Text(
-                        "Back", fontFamily = FontFamily(Font(R.font.lilitaoneregular)),
+                        "Back",
+                        fontFamily = FontFamily(Font(R.font.lilitaoneregular)),
                         fontSize = 24.sp,
                         color = MaterialTheme.colorScheme.onBackground
                     )
