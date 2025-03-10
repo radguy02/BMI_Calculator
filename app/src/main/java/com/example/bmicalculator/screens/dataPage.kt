@@ -1,7 +1,9 @@
 package com.example.bmicalculator.screens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,7 +50,7 @@ import androidx.navigation.NavController
 import com.example.bmicalculator.R
 import com.yourapp.viewmodel.SharedViewModel
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun Datapage(navController: NavController, viewModel: SharedViewModel) {
     var showInfo by remember { mutableStateOf(false) }
@@ -207,11 +209,15 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                         .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
-                                    Box{
+                                    Box {
                                         Button(
                                             onClick = { ageint += 1 },
                                             shape = CircleShape,
-                                            modifier = Modifier.size(45.dp)
+                                            modifier = Modifier
+                                                .size(45.dp)
+                                                .combinedClickable(
+                                                    onClick = { ageint += 1 },
+                                                    onLongClick = { ageint += 5 })
                                         ) {
                                         }
                                         Icon(
@@ -220,7 +226,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                             modifier = Modifier.size(45.dp)
                                         )
                                     }
-                                    Box{
+                                    Box {
                                         Button(
                                             onClick = {
                                                 if (ageint > 0) {
@@ -228,7 +234,19 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                                 }
                                             },
                                             shape = CircleShape,
-                                            modifier = Modifier.size(45.dp)
+                                            modifier = Modifier
+                                                .size(45.dp)
+                                                .combinedClickable(onClick = {
+                                                    if (ageint > 0) {
+                                                        ageint -= 1
+                                                    }
+                                                }, onLongClick = {
+                                                    if (ageint >= 5) {
+                                                        ageint -= 5
+                                                    } else {
+                                                        ageint = 0
+                                                    }
+                                                })
                                         ) {
 
                                         }
@@ -290,11 +308,15 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                         .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
-                                    Box{
+                                    Box {
                                         Button(
                                             onClick = { weightint += 1 },
                                             shape = CircleShape,
-                                            modifier = Modifier.size(45.dp)
+                                            modifier = Modifier
+                                                .size(45.dp)
+                                                .combinedClickable(
+                                                    onClick = { weightint += 1 },
+                                                    onLongClick = { weightint += 10 })
                                         ) {
                                         }
                                         Icon(
@@ -303,7 +325,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                             modifier = Modifier.size(45.dp)
                                         )
                                     }
-                                    Box{
+                                    Box {
                                         Button(
                                             onClick = {
                                                 if (weightint > 0) {
@@ -311,7 +333,19 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                                 }
                                             },
                                             shape = CircleShape,
-                                            modifier = Modifier.size(45.dp)
+                                            modifier = Modifier
+                                                .size(45.dp)
+                                                .combinedClickable(onClick = {
+                                                    if (weightint > 0) {
+                                                        weightint -= 1
+                                                    }
+                                                }, onLongClick = {
+                                                    if (weightint >= 10) {
+                                                        weightint -= 10
+                                                    } else {
+                                                        weightint = 0
+                                                    }
+                                                })
                                         ) {
 
                                         }
