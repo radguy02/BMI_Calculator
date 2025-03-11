@@ -33,11 +33,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -55,7 +55,7 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
     var showInfo by remember { mutableStateOf(false) }
     var sliderProgressValue by remember { mutableIntStateOf(120) }
     var weightint by remember { mutableIntStateOf(0) }
-    var ageint by remember{ mutableIntStateOf(0) }
+    var ageint by remember { mutableIntStateOf(0) }
 
     Scaffold { paddingValues ->
         Box(
@@ -302,31 +302,44 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                                         .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
-                                    Box(modifier = Modifier.combinedClickable(onClick = {
-                                        weightint += 1
-                                    }, onLongClick = { weightint += 10 }
-                                    )) {
+                                    Box(
+                                        modifier = Modifier
+                                            .clip(CircleShape)
+                                            .background(MaterialTheme.colorScheme.primary)
+                                            .combinedClickable(onClick = {
+                                                weightint += 1
+                                            }, onLongClick = { weightint += 10 })
+                                    ) {
                                         Icon(
                                             imageVector = Icons.Default.Add,
                                             contentDescription = "",
-                                            modifier = Modifier.size(45.dp)
+                                            modifier = Modifier
+                                                .size(45.dp)
+                                                .clip(CircleShape)
                                         )
                                     }
-                                    Box(modifier = Modifier.combinedClickable(onClick = {
-                                        if (weightint > 0) {
-                                            weightint -= 1
-                                        }
-                                    }, onLongClick = {
-                                        if (weightint >= 10) {
-                                            weightint -= 10
-                                        } else {
-                                            weightint = 0
-                                        }
-                                    })) {
+                                    Box(
+                                        modifier = Modifier
+                                            .clip(CircleShape)
+                                            .background(MaterialTheme.colorScheme.primary)
+                                            .combinedClickable(onClick = {
+                                                if (weightint > 0) {
+                                                    weightint -= 1
+                                                }
+                                            }, onLongClick = {
+                                                if (weightint >= 10) {
+                                                    weightint -= 10
+                                                } else {
+                                                    weightint = 0
+                                                }
+                                            })
+                                    ) {
                                         Icon(
                                             painter = painterResource(R.drawable.sub),
                                             contentDescription = "",
-                                            modifier = Modifier.size(45.dp)
+                                            modifier = Modifier
+                                                .size(45.dp)
+                                                .clip(CircleShape)
                                         )
                                     }
                                 }
@@ -334,7 +347,6 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                         }
                     }
                 }
-
 
                 Row(
                     modifier = Modifier
@@ -358,7 +370,6 @@ fun Datapage(navController: NavController, viewModel: SharedViewModel) {
                     }
                 }
             }
-
 
             Box(
                 modifier = Modifier
